@@ -23,7 +23,7 @@ import java.util.Set;
   @GeneratedValue
   protected Long id;
   private String examId;
-  private int questionNumber;
+  private Integer questionNumber;
   private String question;
 
   @OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
@@ -49,11 +49,22 @@ import java.util.Set;
 
   @Override
   public String toString() {
-    final StringBuilder sb = new StringBuilder("CD{");
-    sb.append("id=").append(id).append('\'');
-    sb.append(", examId='").append(examId).append('\'');
-    sb.append(", questionNumber='").append(questionNumber).append('\'');
-    sb.append('}');
-    return sb.toString();
+    return "Question{" +
+            "id=" + id +
+            ", examId='" + examId + '\'' +
+            ", questionNumber=" + questionNumber +
+            ", question='" + question + '\'' +
+            ", questionAnswers=" + questionAnswers +
+            '}';
   }
+
+  //  @Override
+//  public String toString() {
+//    final StringBuilder sb = new StringBuilder("Question{");
+//    sb.append("id=").append(id).append('\'');
+//    sb.append(", examId='").append(examId).append('\'');
+//    sb.append(", questionNumber='").append(questionNumber).append('\'');
+//    sb.append('}');
+//    return sb.toString();
+//  }
 }

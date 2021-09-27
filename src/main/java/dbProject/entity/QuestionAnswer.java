@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 /**
  * @author Arunas Tamosevicius
@@ -22,26 +21,39 @@ public class QuestionAnswer {
   private Integer questionNumber;
   private Integer answerNumber;
   private String questionAnswer;
-  private boolean isAnswerTrue;
+  private boolean isAnswerCorrect;
 
   public QuestionAnswer() {
   }
 
-  public QuestionAnswer(int answerNumber, String questionAnswer, boolean isAnswerTrue) {
+  public QuestionAnswer(int answerNumber, String questionAnswer, boolean isAnswerCorrect) {
     this.answerNumber = answerNumber;
     this.questionAnswer = questionAnswer;
-    this.isAnswerTrue = isAnswerTrue;
+    this.isAnswerCorrect = isAnswerCorrect;
   }
 
   @Override
   public String toString() {
-    final StringBuilder sb = new StringBuilder("QuestionAnswer{");
-    sb.append("id=").append(id).append('\'');
-    sb.append("examId=").append(examId).append('\'');
-    sb.append("questionNumber=").append(questionNumber).append('\'');
-    sb.append("answerNumber=").append(answerNumber).append('\'');
-    sb.append(", answer='").append(questionAnswer).append('\'');
-    sb.append('}');
-    return sb.toString();
+    return "QuestionAnswer{" +
+            "id=" + id +
+            ", examId='" + examId + '\'' +
+            ", questionNumber=" + questionNumber +
+            ", answerNumber=" + answerNumber +
+            ", questionAnswer='" + questionAnswer + '\'' +
+            ", isAnswerCorrect=" + isAnswerCorrect +
+            '}';
   }
+
+
+  //  @Override
+//  public String toString() {
+//    final StringBuilder sb = new StringBuilder("QuestionAnswer{");
+//    sb.append("id=").append(id).append('\'');
+//    sb.append("examId=").append(examId).append('\'');
+//    sb.append("questionNumber=").append(questionNumber).append('\'');
+//    sb.append("answerNumber=").append(answerNumber).append('\'');
+//    sb.append(", answer='").append(questionAnswer).append('\'');
+//    sb.append('}');
+//    return sb.toString();
+//  }
 }

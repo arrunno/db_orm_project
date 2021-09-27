@@ -3,29 +3,19 @@ package dbProject.service;
 import dbProject.entity.Question;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  * @author Arunas Tamosevicius
  */
 public class QuestionService {
 
-  // ======================================
-  // =             Attributes             =
-  // ======================================
 
   private EntityManager em;
-
-  // ======================================
-  // =            Constructors            =
-  // ======================================
 
   public QuestionService(EntityManager em) {
     this.em = em;
   }
-
-  // ======================================
-  // =           Public Methods           =
-  // ======================================
 
   public Question createQuestion(Question question) {
     em.persist(question);
@@ -42,4 +32,13 @@ public class QuestionService {
 
     return em.find(Question.class, id);
   }
+
+  public Question getQuestionByExamIdAndNumber(String examId, int questionNumber){
+
+    Query query = em.createQuery("FROM Question q WHERE q.examId=:qExamId AND questionNumber=:qQuestionNumber", Question.class);
+    query.setParameter("qExamId", examId);
+    query.setParameter("qQuestionNumber", questionNumber);
+    return (Question) query.getSingleResult();
+  }
+
 }

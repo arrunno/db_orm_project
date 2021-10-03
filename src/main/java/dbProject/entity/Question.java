@@ -2,7 +2,7 @@ package dbProject.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
+//import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,12 +26,12 @@ import java.util.Set;
   private Integer questionNumber;
   private String question;
 
-  @OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
+  @OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinColumns({
           @JoinColumn(name="examId", referencedColumnName = "examId"),
           @JoinColumn(name="questionNumber", referencedColumnName = "questionNumber")
   })
-  @Cascade({org.hibernate.annotations.CascadeType.PERSIST, org.hibernate.annotations.CascadeType.REMOVE})
+//  @Cascade(cascade = CascadeType.ALL)//{org.hibernate.annotations.CascadeType.PERSIST, org.hibernate.annotations.CascadeType.REMOVE})
   private Set<QuestionAnswer> questionAnswers = new HashSet<>();
 
   public Question() {

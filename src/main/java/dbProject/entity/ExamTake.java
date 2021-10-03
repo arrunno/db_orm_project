@@ -4,11 +4,12 @@ package dbProject.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+//import org.hibernate.annotations.Cascade;
+//import org.hibernate.annotations.Cascade;
+//import org.hibernate.annotations.OnDelete;
+//import org.hibernate.annotations.OnDeleteAction;
+import javax.persistence.CascadeType;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -19,9 +20,11 @@ public class ExamTake {
     @Id
     @GeneratedValue
     private Long id;
-//    @ManyToOne()
+    @JoinColumn(name = "examTakeInfoId")
+    @ManyToOne(cascade = CascadeType.ALL)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
 //    @Cascade({org.hibernate.annotations.CascadeType.PERSIST, org.hibernate.annotations.CascadeType.REMOVE})
-//    private ExamTakeInfo examTakeInfo;
+    private ExamTakeInfo examTakeInfo;
     private String examId;
     private Integer questionNumber;
     private Integer userAnswer;
@@ -37,11 +40,12 @@ public class ExamTake {
     public String toString() {
         return "ExamTake{" +
                 "id=" + id +
-//                ", examTakeInfo='" + examTakeInfo + '\'' +
+                ", examTakeInfo='" + examTakeInfo + '\'' +
                 ", examId='" + examId + '\'' +
                 ", questionNumber=" + questionNumber +
                 ", userAnswer=" + userAnswer +
                 ", isAnswerCorrect=" + isAnswerCorrect +
+                ", examTakeInfoId=" + getExamTakeInfo().getId() +
                 '}';
     }
 

@@ -2,6 +2,7 @@ package dbProject;
 
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
+//import org.hibernate.cfg.Environment;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -19,6 +20,7 @@ public enum PersistenceManager {
 
 //        Configuration configuration = new Configuration();
         Properties properties = createProperties();
+//        properties.add
 //        configuration.setProperties(properties);
 
         emfactory = Persistence.createEntityManagerFactory("jpa-project", properties);
@@ -44,6 +46,7 @@ public enum PersistenceManager {
 //        properties.put(Environment.HBM2DDL_AUTO, "update");
 
         properties.put(Environment.HBM2DDL_AUTO, "create-drop");
+//        properties.put(Environment.HBM2DDL_AUTO, "update");
 
         return properties;
     }

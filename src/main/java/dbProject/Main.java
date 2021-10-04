@@ -16,72 +16,15 @@ public class Main {
         EntityManager em = PersistenceManager.instance.getentitymanager();
         EntityTransaction tx = em.getTransaction();
 
-//        QuestionService service = new QuestionService(em);
-
-//        QuestionService qs = new QuestionService(em);
-//        List<Question> questions = qs.getQuestionListByExamId("Geo_02");
-//
-//        Scanner sc = new Scanner(System.in);
-//        LocalDate date = LocalDate.now();
-//        String examId = "Geo_02";
-//        String userEmail = "arunas@student.com";
-//        String examInfo = "Lietuvos geografija 1";
-//        int correctAnswers = 0;
-//        int totalquestions = 0;
-//
-//
-//
-//        ExamTakeInfo eti = new ExamTakeInfo(examId, userEmail, examInfo, date);
-//        tx.begin();
-//            em.persist(eti);
-//        tx.commit();
-//
-//        for (Question oneQs : questions){
-//            int questionNumber = oneQs.getQuestionNumber();
-//            totalquestions += 1;
-//            System.out.println(questionNumber + " " + oneQs.getQuestion());
-//            for (QuestionAnswer answer : oneQs.getQuestionAnswers()) {
-//                System.out.println("\t"+answer.getAnswerNumber() + " " + answer.getQuestionAnswer());
-//            }
-//            int userChoice = utils.getInpIntOr0(sc, "");
-//            tx.begin();
-//                ExamAnswer eAn = new ExamAnswer(examId, questionNumber, userChoice);
-//                eAn.setExamTakeInfo(eti);
-//                es.createExamAnswer(eti, eAn);
-//            tx.commit();
-//            if (eAn.isAnswerCorrect()){
-//                correctAnswers += 1;
-//            }
-//        }
-//
-//        eti.setNumberOfCorrectAnswers(correctAnswers);
-//        eti.setTotalExamQuestions(totalquestions);
-//        tx.begin();
-//            em.persist(eti);
-//        tx.commit();
-//
-//        System.out.println("corr ans " + correctAnswers);
-//        System.out.println("Total questions in exam " + totalquestions);
-
+        //// PrefillDB
         DataActions.fill();
 
+        //// Actions
         Scanner sc = new Scanner(System.in);
-
         Gui gui = new Gui(em, tx);
         gui.startGUI(sc);
 
-
-//        ExamService es = new ExamService(em);
-//        LocalDate date = LocalDate.of(2021, 8, 14);
-//        String examId = "Geo_02";
-//        String userEmail = "petras@student.com";
-//        String examInfo = "Lietuvos geografija 1";
-//        es.takeExam(sc, tx, examId, userEmail, examInfo, date);
-
         em.close();
-
-
-
 
     }
 

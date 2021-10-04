@@ -32,4 +32,13 @@ public class ExamTakeInfo {
         this.examInfo = examInfo;
         this.examTakeDate = examTakeDate;
     }
+
+    @Override
+    public String toString() {
+        return  "examId='" + examId + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", examTakeDate=" + examTakeDate +
+                ", numberOfCorrectAnswers=" + numberOfCorrectAnswers +
+                ", totalExamQuestions=" + totalExamQuestions;
+    }
 }

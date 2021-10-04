@@ -12,7 +12,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Scanner;
 import java.util.Set;
 
 public class DataActions {
@@ -83,45 +82,6 @@ public class DataActions {
         q6 = service.createQuestion(q6);
         tx.commit();
 
-//        Set<QuestionAnswer> upes = q2.getQuestionAnswers();
-//        System.out.println("Originalus atsakymu setas: " + upes);
-        //// DELETE
-//        answerRemove(upes,3);
-//        answerRemove(upes,4);
-
-//        System.out.println("Pakoreguotas atsakymu setas: " + upes);
-
-//        tx.begin();
-//            q2.setQuestionAnswers(upes);
-//            q2 = service.createQuestion(q2);
-//        tx.commit();
-
-        //// UPDATE
-//        tx.begin();
-//            updateAnswerSet(upes,3, "Jandze", 2, "Geo_01");
-//            q2 = service.createQuestion(q2);
-//        tx.commit();
-
-
-
-        // Finds entity by primary key
-//        q1 = service.findQuestion(q1.getId());
-//
-//        System.out.println("Question Found     : " + q1);
-//        System.out.println("   Answers : " + q1.getQuestionAnswers());
-
-        // Removes entity
-//        tx.begin();
-//        service.removeQuestion(q1.getId());
-//        tx.commit();
-
-//        System.out.println("Entity Removed");
-
-        // Finds Entity by primary key
-//        q1 = service.findQuestion(q1.getId());
-//
-//        System.out.println("Entity Not Found : " + q1);
-
         //// EXAM TAKES creation
         ExamService ets = new ExamService(em);
 
@@ -180,6 +140,71 @@ public class DataActions {
             q7.setQuestionAnswers(answers7);
             service.createQuestion(q7);
         tx.commit();
+
+        tx.begin();
+        ExamTakeInfo eti3 = new ExamTakeInfo("Geo_02", "petras@student.com", "Lietuvos geografija 1", LocalDate.of(2021,8,22));
+        ExamAnswer et7 = new ExamAnswer("Geo_02", 1, 2);
+        et7.setExamTakeInfo(eti3);
+        ets.createExamAnswer(eti3, et7);
+        tx.commit();
+
+        tx.begin();
+        ExamAnswer et8 = new ExamAnswer("Geo_02", 2, 3);
+        et8.setExamTakeInfo(eti3);
+        ets.createExamAnswer(eti3, et8);
+        tx.commit();
+
+        tx.begin();
+        ExamAnswer et9 = new ExamAnswer("Geo_02", 3, 3);
+        et9.setExamTakeInfo(eti3);
+        ets.createExamAnswer(eti3, et9);
+        tx.commit();
+        tx.begin();
+        eti3.setTotalExamQuestions(4);
+        eti3.setNumberOfCorrectAnswers(3);
+        em.persist(eti3);
+        tx.commit();
+    }
+
+    public void otherCrudOperations(){
+//        Set<QuestionAnswer> upes = q2.getQuestionAnswers();
+//        System.out.println("Originalus atsakymu setas: " + upes);
+        //// DELETE
+//        answerRemove(upes,3);
+//        answerRemove(upes,4);
+
+//        System.out.println("Pakoreguotas atsakymu setas: " + upes);
+
+//        tx.begin();
+//            q2.setQuestionAnswers(upes);
+//            q2 = service.createQuestion(q2);
+//        tx.commit();
+
+        //// UPDATE
+//        tx.begin();
+//            updateAnswerSet(upes,3, "Jandze", 2, "Geo_01");
+//            q2 = service.createQuestion(q2);
+//        tx.commit();
+
+
+
+        // Finds entity by primary key
+//        q1 = service.findQuestion(q1.getId());
+//
+//        System.out.println("Question Found     : " + q1);
+//        System.out.println("   Answers : " + q1.getQuestionAnswers());
+
+        // Removes entity
+//        tx.begin();
+//        service.removeQuestion(q1.getId());
+//        tx.commit();
+
+//        System.out.println("Entity Removed");
+
+        // Finds Entity by primary key
+//        q1 = service.findQuestion(q1.getId());
+//
+//        System.out.println("Entity Not Found : " + q1);
     }
 
 

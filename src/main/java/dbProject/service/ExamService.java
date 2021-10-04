@@ -3,10 +3,7 @@ package dbProject.service;
 //import dbProject.entity.ExamTake;
 
 
-import dbProject.entity.ExamAnswer;
-import dbProject.entity.ExamTakeInfo;
-import dbProject.entity.Question;
-import dbProject.entity.QuestionAnswer;
+import dbProject.entity.*;
 import dbProject.utils.Utils;
 
 import javax.persistence.EntityManager;
@@ -42,34 +39,27 @@ public class ExamService {
         em.persist(examAnswer);
         return examAnswer;
     }
-//Map<String, Integer>
-    public void getExamTakeStats(String examId){
 
-        List<?> dd = em.createQuery("Select distinct examTakeInfo.id, examId From ExamAnswer WHERE examId = : qExamId ").setParameter("qExamId","Geo_01").getResultList();
+    public void getExamTakeStats(){
 
-        List<?> examQuestionNums =  em.createQuery("Select Count(examId), examId as questionCount From Question Group By examId ").getResultList();
+//        List<?> examQuestionStats =  em.createQuery("Select examId, Count(examId) as examTakes, Sum(numberOfCorrectAnswers) " +
+//                "as numberOfCorrectAnswers, Sum(totalExamQuestions) as totalExamQuestions From ExamTakeInfo " +
+//                        "Group by examId", ExamTakeInfo.class).getResultList();
 
-//        List<?> asdf = em.createQuery("select Count(et.examTakeInfo) As total_answers, etr.ra as right_answers, " +
-//                        "et.examTakeInfo.id FROM ExamAnswer et left join (Select Count(et2.examTakeInfo.id) As ra, et2.examTakeInfo.id " +
-//                        "FROM ExamAnswer et2 WHERE et2.isanswercorrect = true group by et2.examTakeInfo.id) as etr " +
-//                "ON et.examTakeInfo.id = etr.examTakeInfo.id group by et.examTakeInfo.id, etr.ra).getResultList() ").getResultList();
+        List<ExamTakeInfo> examQuestionStatsL =  em.createQuery("Select eti From ExamTakeInfo eti Order By examId, userEmail, examTakeDate", ExamTakeInfo.class).getResultList();
 
-        List<?> totalExamQuestions = em.createQuery("select COUNT(et.examTakeInfo) As total_questions, et.examTakeInfo.id FROM ExamAnswer et Group By et.examTakeInfo.id").getResultList(); // Stream().forEach(el->{
+        for(ExamTakeInfo el : examQuestionStatsL) {
+            System.out.println(el.toString());
+        }
+        return;
+    }
 
-        Object ss = totalExamQuestions.get(0);
-
-        String a = "";
-
-/*
-        select COUNT(et.exam_take_info_id) As total_answers, max(coalesce(etr.ra, 0)) as right_answers,
-        et.exam_take_info_id FROM exam_takes et
-        left join (Select COUNT(et2.exam_take_info_id) As ra, et2.exam_take_info_id
-        FROM exam_takes et2 WHERE et2.isanswercorrect = true group by et2.exam_take_info_id) as etr
-        ON et.exam_take_info_id = etr.exam_take_info_id
-        group by et.exam_take_info_id, etr.ra
-*/
-
-
+    public void getExamStats(){
+        List<ExamAnswer> examAnswersL =  em.createQuery("Select ea From ExamAnswer ea Order By examId, questionNumber, userAnswer", ExamAnswer.class).getResultList();
+        for(ExamAnswer el : examAnswersL) {
+            System.out.println(el.toString());
+        }
+        return;
     }
 
 
@@ -134,6 +124,7 @@ public class ExamService {
         tx.begin();
             em.persist(eti);
         tx.commit();
+        return;
 
     }
 

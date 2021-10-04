@@ -64,11 +64,23 @@ public class Gui {
     private void processTeachersActions(Scanner sc, String message) {
         showIfNotEmpty(message);
         System.out.println("1 - Paziureti egzaminu info");
-        System.out.println("2 - paziureti egzamino statistika");
+        System.out.println("2 - paziureti egzaminu statistika");
         System.out.println("0 - Iseiti");
         int userChoice = Utils.getInpIntOr0(sc, "");
-
-            System.out.println(userChoice);
+        switch (userChoice){
+            case 1 -> {
+                this.examService.getExamTakeStats();
+                processTeachersActions(sc, " ");
+            }
+            case 2 -> {
+                this.examService.getExamStats();
+                processTeachersActions(sc, " ");
+            }
+            default -> {
+                System.out.println("viso gero");
+                return;
+            }
+        }
     }
 
     private void processStudentsActions(Scanner sc, String message) {
@@ -80,12 +92,13 @@ public class Gui {
         int userChoice = Utils.getInpIntOr0(sc, "");
         if (userChoice == 1){
             this.examService.takeExam(sc, this.et, "Geo_01", this.userEmail, "Pasaulio geografija 1", LocalDate.now());
+            processStudentsActions(sc, "\n Pasirinkte egzammina, arba 0 iseiti");
         } else if (userChoice == 2) {
-            this.examService.takeExam(sc, this.et, "Geo_02", this.userEmail, "Pasaulio geografija 2", LocalDate.now());
+            this.examService.takeExam(sc, this.et, "Geo_02", this.userEmail, "Lietuvos geografija 1", LocalDate.now());
+            processStudentsActions(sc, "\n Pasirinkte egzammina, arba 0 iseiti");
         } else {
             System.out.println("viso gero");
             return;
         }
-
     }
     }

@@ -31,15 +31,11 @@ public class ExamAnswer {
 
     @Override
     public String toString() {
-        return "ExamAnswers{" +
-                "id=" + id +
-                ", examTakeInfo='" + examTakeInfo + '\'' +
-                ", examId='" + examId + '\'' +
+        return  "examId='" + examId + '\'' +
                 ", questionNumber=" + questionNumber +
                 ", userAnswer=" + userAnswer +
                 ", isAnswerCorrect=" + isAnswerCorrect +
-                ", examTakeInfoId=" + getExamTakeInfo().getId() +
-                '}';
+                ", examTakeInfoId=" + getExamTakeInfo().getId();
     }
 
 

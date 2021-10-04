@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
+@Table(name="question_answers")
 public class QuestionAnswer {
 
   @Id
@@ -44,16 +45,4 @@ public class QuestionAnswer {
             '}';
   }
 
-
-  //  @Override
-//  public String toString() {
-//    final StringBuilder sb = new StringBuilder("QuestionAnswer{");
-//    sb.append("id=").append(id).append('\'');
-//    sb.append("examId=").append(examId).append('\'');
-//    sb.append("questionNumber=").append(questionNumber).append('\'');
-//    sb.append("answerNumber=").append(answerNumber).append('\'');
-//    sb.append(", answer='").append(questionAnswer).append('\'');
-//    sb.append('}');
-//    return sb.toString();
-//  }
 }
